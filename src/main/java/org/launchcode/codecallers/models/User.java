@@ -1,10 +1,13 @@
 package org.launchcode.codecallers.models;
 
+import jakarta.persistence.Access;
 import jakarta.persistence.Entity;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import javax.swing.*;
 import java.util.Objects;
 
 @Entity
@@ -15,13 +18,19 @@ public class User extends AbstractEntity {
     @Email
     private String email;
 
+    @NotBlank
+    @Size (min=8)
+    private String password;
+
     private int score;
 
 
-    public User(String email, int score) {
+    public User(String email, int score, String password) {
         this.email = email;
         this.score = score;
+        this.password = password;
     }
+
 
     public User(){}
 
@@ -40,6 +49,13 @@ public class User extends AbstractEntity {
     public void setEmail(String email) {
         this.email = email;
     }
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -49,6 +65,8 @@ public class User extends AbstractEntity {
         User user = (User) o;
         return Objects.equals(email, user.email);
     }
+
+
 
     @Override
     public int hashCode() {

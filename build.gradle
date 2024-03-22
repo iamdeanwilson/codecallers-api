@@ -12,6 +12,7 @@ java {
 }
 
 repositories {
+	jcenter()
 	mavenCentral()
 }
 
@@ -23,10 +24,16 @@ dependencies {
 	implementation 'mysql:mysql-connector-java'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	implementation 'mysql:mysql-connector-java:8.0.28'
+	implementation 'org.mindrot:jbcrypt:0.4'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation("org.jmockit:jmockit:1.49")
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+jar {
+	manifest {
+		attributes 'Main-Class': 'com.example.Main'
+	}
 }

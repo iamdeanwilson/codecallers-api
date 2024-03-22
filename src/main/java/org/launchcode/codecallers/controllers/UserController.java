@@ -23,6 +23,7 @@ public class UserController {
         return "New User Added!";
     }
 
+
     @GetMapping("/index")
     public List<User> getAllUsers(){
         return userService.getAllUsers();
