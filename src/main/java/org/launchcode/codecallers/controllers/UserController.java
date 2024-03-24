@@ -25,15 +25,30 @@ public class UserController {
         return "New User Added!";
     }
 
+    @DeleteMapping("/{userID}/delete")
+    public void deleteProfile(@PathVariable int userID){
+
+        userService.deleteById(userID);
+
+    }
+
     @PutMapping("/{userID}/update")
     public User updateProfile(@RequestBody User newUser, @PathVariable int userID){
 
         return userService.findById(userID)
                 .map(user -> {
-                    user.setFirstName(newUser.getFirstName());
-                    user.setLastName(newUser.getLastName());
-                    user.setBio(newUser.getBio());
-                    user.setBirthday(newUser.getBirthday());
+                    if (!newUser.getFirstName().isBlank()) {
+                        user.setFirstName(newUser.getFirstName());
+                    }
+                    if (!newUser.getLastName().isBlank()) {
+                        user.setLastName(newUser.getLastName());
+                    }
+                    if (!newUser.getBio().isBlank()) {
+                        user.setBio(newUser.getBio());
+                    }
+                    if (!newUser.getBirthday().isBlank()) {
+                        user.setBirthday(newUser.getBirthday());
+                    }
                     return userService.saveUser(user);
                 }).orElseThrow(() -> new UserNotFoundException(userID));
 

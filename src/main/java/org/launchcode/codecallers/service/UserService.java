@@ -12,5 +12,6 @@ public interface UserService {
 
     Optional <User> findById(int id);
 
+    public void deleteById(int id);
 
 }
