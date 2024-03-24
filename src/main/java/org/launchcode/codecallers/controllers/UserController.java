@@ -1,5 +1,6 @@
 package org.launchcode.codecallers.controllers;
 
+import org.launchcode.codecallers.exception.UserNotFoundException;
 import org.launchcode.codecallers.models.User;
 import org.launchcode.codecallers.models.data.UserRepository;
 import org.launchcode.codecallers.service.UserService;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -23,6 +25,19 @@ public class UserController {
         return "New User Added!";
     }
 
+    @PutMapping("/{userID}/update")
+    public User updateProfile(@RequestBody User newUser, @PathVariable int userID){
+
+        return userService.findById(userID)
+                .map(user -> {
+                    user.setFirstName(newUser.getFirstName());
+                    user.setLastName(newUser.getLastName());
+                    user.setBio(newUser.getBio());
+                    user.setBirthday(newUser.getBirthday());
+                    return userService.saveUser(user);
+                }).orElseThrow(() -> new UserNotFoundException(userID));
+
+    }
 
     @GetMapping("/index")
     public List<User> getAllUsers(){
