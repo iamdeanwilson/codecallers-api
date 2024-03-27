@@ -37,13 +37,15 @@ public class User extends AbstractEntity {
 
     private int score;
 
+    private String profilePic;
+
     private String birthday;
 
     @Size(max=2000)
     private String bio;
 
     public User(String firstName, String lastName, String username, String email, String password,
-                int score, String birthday, String bio) {
+                int score, String birthday, String bio, String profilePic) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -52,72 +54,45 @@ public class User extends AbstractEntity {
         this.score = score;
         this.birthday = birthday;
         this.bio = bio;
+        this.profilePic = profilePic;
     }
 
     public User(){}
 
-    public String getBirthday() {
-        return birthday;
-    }
+    public String getProfilePic() { return profilePic; }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
+    public void setProfilePic(String profilePic) { this.profilePic = profilePic; }
 
-    public String getBio() {
-        return bio;
-    }
+    public String getBirthday() { return birthday; }
 
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
+    public void setBirthday(String birthday) { this.birthday = birthday; }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public String getBio() { return bio; }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    public void setBio(String bio) { this.bio = bio; }
 
-    public String getLastName() {
-        return lastName;
-    }
+    public String getFirstName() { return firstName; }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
-    public String getUsername() {
-        return username;
-    }
+    public String getLastName() { return lastName; }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    public void setLastName(String lastName) { this.lastName = lastName; }
 
-    public int getScore() {
-        return score;
-    }
+    public String getUsername() { return username; }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
+    public void setUsername(String username) { this.username = username; }
 
-    public String getEmail() {
-        return email;
-    }
+    public int getScore() { return score; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getPassword() {
-        return password;
-    }
+    public void setScore(int score) { this.score = score; }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
+    public String getPassword() { return password; }
+
+    public void setPassword(String password) { this.password = password; }
 
     @Override
     public boolean equals(Object o) {
