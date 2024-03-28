@@ -37,17 +37,30 @@ public class UserController {
 
         return userService.findById(userID)
                 .map(user -> {
-                    if (!newUser.getFirstName().isBlank()) {
-                        user.setFirstName(newUser.getFirstName());
+                    if (newUser.getFirstName() != null) {
+                        if (!newUser.getFirstName().isBlank()) {
+                            user.setFirstName(newUser.getFirstName());
+                        }
                     }
-                    if (!newUser.getLastName().isBlank()) {
-                        user.setLastName(newUser.getLastName());
+                    if (newUser.getLastName() != null) {
+                        if (!newUser.getLastName().isBlank()) {
+                            user.setLastName(newUser.getLastName());
+                        }
                     }
-                    if (!newUser.getBio().isBlank()) {
-                        user.setBio(newUser.getBio());
+                    if (newUser.getBio() != null) {
+                        if (!newUser.getBio().isBlank()) {
+                            user.setBio(newUser.getBio());
+                        }
                     }
-                    if (!newUser.getBirthday().isBlank()) {
-                        user.setBirthday(newUser.getBirthday());
+                    if (newUser.getBirthday() != null) {
+                        if (!newUser.getBirthday().isBlank()) {
+                            user.setBirthday(newUser.getBirthday());
+                        }
+                    }
+                    if (newUser.getProfilePic() != null) {
+                        if (!newUser.getProfilePic().isBlank()) {
+                            user.setProfilePic(newUser.getProfilePic());
+                        }
                     }
                     return userService.saveUser(user);
                 }).orElseThrow(() -> new UserNotFoundException(userID));
