@@ -1,17 +1,20 @@
 package org.launchcode.codecallers.models;
 
-import jakarta.persistence.Access;
-import jakarta.persistence.Entity;
-import jakarta.validation.Valid;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-import javax.swing.*;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
+@Table(name = "users",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "username"),
+                @UniqueConstraint(columnNames = "email")
+        })
 public class User extends AbstractEntity {
 
     @NotBlank
@@ -43,6 +46,11 @@ public class User extends AbstractEntity {
 
     @Size(max=2000)
     private String bio;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(  name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     public User(String firstName, String lastName, String username, String email, String password,
                 int score, String birthday, String bio, String profilePic) {
@@ -93,6 +101,14 @@ public class User extends AbstractEntity {
     public String getPassword() { return password; }
 
     public void setPassword(String password) { this.password = password; }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     @Override
     public boolean equals(Object o) {
