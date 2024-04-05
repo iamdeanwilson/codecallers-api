@@ -134,6 +134,13 @@ public class UserController {
                 roles));
     }
 
+    @DeleteMapping("/{userID}/delete")
+    public void deleteProfile(@PathVariable int userID){
+
+        userService.deleteById(userID);
+
+    }
+
     @PutMapping("/{userID}/update")
     public User updateProfile(@RequestBody User newUser, @PathVariable int userID){
 
