@@ -144,6 +144,8 @@ public class UserController {
     @PutMapping("/{userID}/update")
     public User updateProfile(@RequestBody User newUser, @PathVariable int userID){
 
+        User scoreUser = userService.findById(userID).get();
+
         return userService.findById(userID)
                 .map(user -> {
                     if (newUser.getFirstName() != null) {
@@ -170,6 +172,9 @@ public class UserController {
                         if (!newUser.getProfilePic().isBlank()) {
                             user.setProfilePic(newUser.getProfilePic());
                         }
+                    }
+                    if (newUser.getScore() > 0 ) {
+                        user.setScore(scoreUser.getScore() + newUser.getScore());
                     }
                     return userService.saveUser(user);
                 }).orElseThrow(() -> new UserNotFoundException(userID));
