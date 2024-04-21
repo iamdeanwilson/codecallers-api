@@ -73,6 +73,7 @@ public class UserController {
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()),
                 signUpRequest.getScore(),
+                signUpRequest.getQuizCount(),
                 signUpRequest.getBirthday(),
                 signUpRequest.getBio(),
                 signUpRequest.getProfilePic());
@@ -144,6 +145,9 @@ public class UserController {
     @PutMapping("/{userID}/update")
     public User updateProfile(@RequestBody User newUser, @PathVariable int userID){
 
+        User scoreUser = userService.findById(userID).get();
+        User quizCountUser = userService.findById(userID).get();
+
         return userService.findById(userID)
                 .map(user -> {
                     if (newUser.getFirstName() != null) {
@@ -170,6 +174,12 @@ public class UserController {
                         if (!newUser.getProfilePic().isBlank()) {
                             user.setProfilePic(newUser.getProfilePic());
                         }
+                    }
+                    if (newUser.getScore() > 0 ) {
+                        user.setScore(scoreUser.getScore() + newUser.getScore());
+                    }
+                    if (newUser.getQuizCount() > 0 ) {
+                        user.setQuizCount(quizCountUser.getQuizCount() + newUser.getQuizCount());
                     }
                     return userService.saveUser(user);
                 }).orElseThrow(() -> new UserNotFoundException(userID));
