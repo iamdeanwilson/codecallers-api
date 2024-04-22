@@ -148,6 +148,7 @@ public class UserController {
         User scoreUser = userService.findById(userID).get();
         User quizCountUser = userService.findById(userID).get();
 
+
         return userService.findById(userID)
                 .map(user -> {
                     if (newUser.getFirstName() != null) {
@@ -178,9 +179,11 @@ public class UserController {
                     if (newUser.getScore() > 0 ) {
                         user.setScore(scoreUser.getScore() + newUser.getScore());
                     }
+
                     if (newUser.getQuizCount() > 0 ) {
                         user.setQuizCount(quizCountUser.getQuizCount() + newUser.getQuizCount());
                     }
+
                     return userService.saveUser(user);
                 }).orElseThrow(() -> new UserNotFoundException(userID));
 
