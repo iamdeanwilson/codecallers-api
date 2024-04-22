@@ -26,6 +26,8 @@ public class SignupRequest {
     private Set<String> role;
     private int score;
 
+    private int quizCount;
+
     private String profilePic;
 
     private String birthday;
@@ -91,6 +93,14 @@ public class SignupRequest {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public int getQuizCount() {
+        return score;
+    }
+
+    public void setQuizCount(int quizCount) {
+        this.quizCount = quizCount;
     }
 
     public String getProfilePic() {

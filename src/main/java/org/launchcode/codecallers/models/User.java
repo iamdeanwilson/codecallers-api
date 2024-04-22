@@ -40,6 +40,8 @@ public class User extends AbstractEntity {
 
     private int score;
 
+    private int quizCount;
+
     private String profilePic;
 
     private String birthday;
@@ -53,13 +55,14 @@ public class User extends AbstractEntity {
     private Set<Role> roles = new HashSet<>();
 
     public User(String firstName, String lastName, String username, String email, String password,
-                int score, String birthday, String bio, String profilePic) {
+                int score, int quizCount, String birthday, String bio, String profilePic) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
         this.score = score;
+        this.quizCount = quizCount;
         this.birthday = birthday;
         this.bio = bio;
         this.profilePic = profilePic;
@@ -94,6 +97,10 @@ public class User extends AbstractEntity {
     public int getScore() { return score; }
 
     public void setScore(int score) { this.score = score; }
+
+    public int getQuizCount() { return quizCount; }
+
+    public void setQuizCount(int quizCount) { this.quizCount = quizCount; }
 
     public String getEmail() { return email; }
 
