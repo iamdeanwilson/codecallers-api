@@ -4,6 +4,7 @@ import org.launchcode.codecallers.models.ConfirmationToken;
 import org.launchcode.codecallers.models.User;
 import org.launchcode.codecallers.models.data.ConfirmationTokenRepository;
 import org.launchcode.codecallers.models.data.UserRepository;
+import org.launchcode.codecallers.payload.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
@@ -48,7 +49,7 @@ public class UserServiceImplementation implements UserService {
 
         System.out.println("Confirmation Token: " + confirmationToken.getConfirmationToken());
 
-        return ResponseEntity.ok("Verify email by the link sent on your email address");
+        return ResponseEntity.ok().body(new MessageResponse("Thank you for registering with us! To complete your registration and access all features, please verify your email address by clicking on the link we've sent to your email inbox. If you haven't received the email, please check your spam folder. If you encounter any issues, please contact our support team for assistance."));
     }
 
     @Override
