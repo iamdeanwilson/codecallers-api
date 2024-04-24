@@ -43,6 +43,7 @@ public class User extends AbstractEntity {
     private String profilePic;
 
     private String birthday;
+    private Boolean isVerified = false;
 
     @Size(max=2000)
     private String bio;
@@ -85,6 +86,14 @@ public class User extends AbstractEntity {
 
     public String getLastName() { return lastName; }
 
+    public Boolean getVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(Boolean verified) {
+        isVerified = verified;
+    }
+
     public void setLastName(String lastName) { this.lastName = lastName; }
 
     public String getUsername() { return username; }
@@ -101,6 +110,7 @@ public class User extends AbstractEntity {
     public String getPassword() { return password; }
 
     public void setPassword(String password) { this.password = password; }
+
 
     public Set<Role> getRoles() {
         return roles;
