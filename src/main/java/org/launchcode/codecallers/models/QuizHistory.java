@@ -25,6 +25,8 @@ public class QuizHistory{
         this.score = score;
     }
 
+    public QuizHistory(){}
+
     public int getUserID() {
         return userID;
     }
@@ -67,4 +69,5 @@ public class QuizHistory{
     public int getId() {
         return id;
     }
+
 }

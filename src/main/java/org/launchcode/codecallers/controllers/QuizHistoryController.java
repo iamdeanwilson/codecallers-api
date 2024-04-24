@@ -5,6 +5,9 @@ import org.launchcode.codecallers.models.data.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/quiz")
@@ -29,6 +32,8 @@ public class QuizHistoryController {
         return "";
     }
 
-
-
+    @GetMapping("/index")
+    public List<QuizHistory> findAll() {
+        return (List<QuizHistory>) quizRepository.findAll();
+    }
 }
