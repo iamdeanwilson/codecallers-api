@@ -109,9 +109,15 @@ public class UserController {
         }
 
         user.setRoles(roles);
-        userRepository.save(user);
+        return userService.saveUser(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        //return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+    //@RequestMapping(value="/confirm-account", method= {RequestMethod.PUT})
+
+    @RequestMapping(value="/confirm-account", method= {RequestMethod.GET, RequestMethod.POST})
+    public ResponseEntity<?> confirmUserAccount(@RequestParam("token")String confirmationToken) {
+        return userService.confirmEmail(confirmationToken);
     }
 
     @PostMapping("/login")
@@ -143,7 +149,7 @@ public class UserController {
     }
 
     @PutMapping("/{userID}/update")
-    public User updateProfile(@RequestBody User newUser, @PathVariable int userID){
+    public ResponseEntity<?> updateProfile(@RequestBody User newUser, @PathVariable int userID){
 
         User scoreUser = userService.findById(userID).get();
         User quizCountUser = userService.findById(userID).get();
