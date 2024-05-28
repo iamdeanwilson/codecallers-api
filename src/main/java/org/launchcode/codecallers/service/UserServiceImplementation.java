@@ -30,9 +30,9 @@ public class UserServiceImplementation implements UserService {
     @Override
     public ResponseEntity<?> saveUser(User user) {
 
-        if (userRepository.existsByEmail(user.getEmail())) {
-            return ResponseEntity.badRequest().body("Error: Email is already in use!");
-        }
+//        if (userRepository.existsByEmail(user.getEmail())) {
+//            return ResponseEntity.badRequest().body("Error: Email is already in use!");
+//        }
 
         userRepository.save(user);
 
